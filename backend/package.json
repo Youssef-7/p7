@@ -14,7 +14,10 @@
     "mongoose": "^5.13.7",
     "mongoose-unique-validator": "^2.0.3",
     "multer": "^1.4.3",
-    "node": "^16.6.1"
+    "mysql": "^2.18.1",
+    "node": "^16.6.1",
+    "password-validator": "^5.1.1",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "@vue/cli-plugin-router": "^4.5.13"

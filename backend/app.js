@@ -1,18 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const sauceRoutes = require('./routes/Sauce');
-const userRoutes = require('./routes/User');
+const postRoutes = require('./routes/post');
+const userRoutes = require('./routes/user');
 const path = require('path');
 const cors = require('cors');
 const helmet = require("helmet");
 
-
-mongoose.connect('mongodb+srv://piquant01:piquant01@cluster1.e2ogl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-  { useNewUrlParser: true,
-    useUnifiedTopology: true })
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 
 const app = express();
