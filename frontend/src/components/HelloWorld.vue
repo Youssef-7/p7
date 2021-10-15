@@ -5,13 +5,17 @@
             </div>
             <div id="formBloc">
                 <form>
+                    <input v-if = "mode == 'create'" placeholder="Nom">
+                    <input v-if = "mode == 'create'" placeholder="Prenom">
                     <input placeholder="Adresse e-mail">
                     <input placeholder="Mot de passe">
-                    <button id="btnConect"  >Se connecter</button>
+                    <button id="btnConect" v-if = "mode == 'login'" @click="connectAccount" >Se connecter</button>
+                    <button v-else id="btnSignUp">Creer un compte</button>
+                    <a v-if = "mode == 'create'" @click="connectAccount" href="#"><p>Se connecter</p></a>
                     <a href="#"><p>Mot de passe oublié ?</p></a>
+                    <a v-if = "mode == 'login'" @click="createAccount" href="#"><p>Creer un compte</p></a>
                     <div id="trait"></div>
-                    <button id="btnSignUp" 
-                    >Creer un compte</button>
+                    
                 </form>  
             </div>
         </div>
@@ -28,10 +32,18 @@ export default {
       password: "",
       userId: "",
       error: "",
+      mode : "login",
     };
   },
   methods: {
-    async buttonLogin() {
+    connectAccount(){
+        this.mode = "login";
+    },
+    createAccount(){
+        this.mode = "create";
+    },
+
+    async btnConect() {
       await axios
         .post("http://localhost:3000/api/auth/login", {
           email: this.email,
