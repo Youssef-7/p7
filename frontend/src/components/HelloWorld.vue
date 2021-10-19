@@ -7,8 +7,8 @@
                 <form>
                     <input v-if = "mode == 'create'" placeholder="Nom">
                     <input v-if = "mode == 'create'" placeholder="Prenom">
-                    <input placeholder="Adresse e-mail">
-                    <input placeholder="Mot de passe">
+                    <input v-model = "Email" placeholder="Adresse e-mail">
+                    <input v-model = "mdp" placeholder="Mot de passe">
                     <button id="btnConect" v-if = "mode == 'login'" @click="connectAccount" >Se connecter</button>
                     <button v-else id="btnSignUp">Creer un compte</button>
                     <a v-if = "mode == 'create'" @click="connectAccount" href="#"><p>Se connecter</p></a>
@@ -27,11 +27,6 @@ export default {
   name: 'HelloWorld',
   data() {
     return {
-      token: "",
-      email: "",
-      password: "",
-      userId: "",
-      error: "",
       mode : "login",
     };
   },
@@ -43,21 +38,24 @@ export default {
         this.mode = "create";
     },
 
-    async btnConect() {
-      await axios
-        .post("http://localhost:3000/api/auth/login", {
-          email: this.email,
-          password: this.password,
-        })
-        .then((res) => {
-          {
-            localStorage.setItem("token", res.data.token);
-            localStorage.setItem("id", res.data.userId);
-          }
-        })
-        .catch((error) => {
-          this.error = error.response.data;
+    // async btnSignUp() {
+    //   await axios
+    //   u_email : this.email,
+    //   u_pwd : this.mdp,
+    // })  this.email = "";
+    //     this.mdp = "";
+    async btnSignUp() {
+      try {
+//localhost:3000/api/auth", {
+        await axios.post("http://localhost:3000/api/auth",{ 
+          u_email : this.email,
+          u_pwd : this.mdp,
         });
+        this.email = "";
+        this.mdp = "";
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };
