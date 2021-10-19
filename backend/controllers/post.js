@@ -1,8 +1,9 @@
-import { getPost, getPostById, insertPost, updatePostById, deletePostById } from "../models/post.js";
- 
+// import { getPost, getPostById, insertPost, updatePostById, deletePostById } from "../models/post.js";
+const post = require('../models/post');
+
 // Get All posts
-export const showPost = (req, res) => {
-    getPost((err, results) => {
+exports.showPost = (req, res) => {
+    post.getPost((err, results) => {
         if (err){
             res.send(err);
         }else{
@@ -12,8 +13,8 @@ export const showPost = (req, res) => {
 }
  
 // Get Single post 
-export const showPostById = (req, res) => {
-    getPostById(req.params.id, (err, results) => {
+exports.showPostById = (req, res) => {
+    post.getPostById(req.params.id, (err, results) => {
         if (err){
             res.send(err);
         }else{
@@ -23,9 +24,9 @@ export const showPostById = (req, res) => {
 }
  
 // Create New post
-export const createPost = (req, res) => {
+exports.createPost = (req, res) => {
     const data = req.body;
-    insertPost(data, (err, results) => {
+    post.insertPost(data, (err, results) => {
         if (err){
             res.send(err);
         }else{
@@ -35,10 +36,10 @@ export const createPost = (req, res) => {
 }
  
 // Update post
-export const updatePost = (req, res) => {
+exports.updatePost = (req, res) => {
     const data  = req.body;
     const id    = req.params.id;
-    updatePostById(data, id, (err, results) => {
+    post.updatePostById(data, id, (err, results) => {
         if (err){
             res.send(err);
         }else{
@@ -48,9 +49,9 @@ export const updatePost = (req, res) => {
 }
  
 // Delete post
-export const deletePost = (req, res) => {
+exports.deletePost = (req, res) => {
     const id = req.params.id;
-    deletePostById (id, (err, results) => {
+    post.deletePostById (id, (err, results) => {
         if (err){
             res.send(err);
         }else{

@@ -1,26 +1,28 @@
 // import express
-import express from "express";
+const express = require('express');
+
  
 // import function from controller
-import { showPost, showPostById, createPost, updatePost, deletePost } from "../controllers/post.js";
+const postCtrl = require('../controllers/post');
+
  
 // init express router
 const router = express.Router();
  
 // Get All Product
-router.get('/post', showPost);
+router.get('/post', postCtrl.showPost);
  
 // Get Single Product
-router.get('/post/:id', showPostById);
+router.get('/post/:id', postCtrl.showPostById);
  
 // Create New Product
-router.post('/post', createPost);
+router.post('/post', postCtrl.createPost);
  
 // Update Product
-router.put('/post/:id', updatePost);
+router.put('/post/:id', postCtrl.updatePost);
  
 // Delete Product
-router.delete('/post/:id', deletePost);
+router.delete('/post/:id', postCtrl.deletePost);
  
 // export default router
-export default router;
+module.exports = router;
