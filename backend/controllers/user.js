@@ -1,5 +1,4 @@
 const database = require("../config/database");
-const user = require("../models/user");
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
@@ -20,19 +19,21 @@ exports.signup = (req, res, next) => {
   else if (passwordParams.validate(req.body.u_pwd)) {
   bcrypt.hash(req.body.u_pwd, 10)
     .then(hash => {
-      const user = new User({
+      User.insertUser ({
+        u_pseudo: req.body.u_pseudo,
         u_email: req.body.u_email,
         u_pwd: hash
-      });
-      user.save()
-        .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
+      }, (err, results) => {
+        if (err) res.status(500).json({err})
+        else res.status(201).json('Utilisateur créé !');
+      })
         .catch(error => res.status(400).json({ error }));
     })
-    .catch(error => res.status(500).json({ error }));
+    .catch(error => res.status(500).json({ error: "1"}));
 };
 } // End else if
 exports.login = (req, res, next) => {
-  User.findOne({ u_email: req.body.u_email })
+  User.getUsers({ u_email: req.body.u_email })
     .then(user => {
       if (!user) {
         return res.status(401).json({ error: 'Utilisateur non trouvé !' });
@@ -43,7 +44,7 @@ exports.login = (req, res, next) => {
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
           }
           res.status(200).json({
-            userId: u_id,
+            userId: user.u_id,
             token: jwt.sign(
               // { userId: user._id, + pseudo},
               'RANDOM_TOKEN_SECRET',
@@ -51,7 +52,7 @@ exports.login = (req, res, next) => {
             )
           });
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({ error:"2"}));
     })
-    .catch(error => res.status(500).json({ error }));
+    .catch(error => res.status(500).json({ error:"3" }));
 };

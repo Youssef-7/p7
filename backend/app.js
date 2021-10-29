@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 const postRoutes = require('./routes/post');
 const userRoutes = require('./routes/user');
 const path = require('path');
@@ -10,6 +9,7 @@ const helmet = require("helmet");
 
 
 const app = express();
+app.use(cors());
 
 app.use(helmet());
 
