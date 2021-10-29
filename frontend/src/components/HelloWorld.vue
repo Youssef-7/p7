@@ -5,12 +5,11 @@
             </div>
             <div id="formBloc">
                 <form>
-                    <input v-if = "mode == 'create'" placeholder="Nom">
-                    <input v-if = "mode == 'create'" placeholder="Prenom">
+                    <input v-model = "pseudo" v-if = "mode == 'create'" placeholder="Pseudo">
                     <input v-model = "Email" placeholder="Adresse e-mail">
                     <input v-model = "mdp" placeholder="Mot de passe">
                     <button id="btnConect" v-if = "mode == 'login'" @click="connectAccount" >Se connecter</button>
-                    <button v-else id="btnSignUp">Creer un compte</button>
+                    <button v-else id="btnSignUp" @click="btnSignUp">Creer un compte</button>
                     <a v-if = "mode == 'create'" @click="connectAccount" href="#"><p>Se connecter</p></a>
                     <a href="#"><p>Mot de passe oublié ?</p></a>
                     <a v-if = "mode == 'login'" @click="createAccount" href="#"><p>Creer un compte</p></a>
@@ -28,6 +27,9 @@ export default {
   data() {
     return {
       mode : "login",
+      u_pseudo :"",
+      u_email : "",
+      u_pwd : "",
     };
   },
   methods: {
@@ -47,10 +49,12 @@ export default {
     async btnSignUp() {
       try {
 //localhost:3000/api/auth", {
-        await axios.post("http://localhost:3000/api/auth",{ 
+        await axios.post("http://localhost:3000/api/auth/signup",{ 
+          u_pseudo : this.pseudo,
           u_email : this.email,
           u_pwd : this.mdp,
         });
+        this.pseudo = "";
         this.email = "";
         this.mdp = "";
       } catch (err) {
