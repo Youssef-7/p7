@@ -4,7 +4,9 @@ const db = require('../config/database');
 
 exports.insertUser = (data, result) => {
      db.query(
-      "INSERT INTO usagers  (u_pseudo, u_email, u_pwd, ) VALUES (?,?,?)", [data],(err, results) => {             
+    //UPDATE product SET product_name = ?, product_price = ? WHERE product_id = ?", [data.product_name, data.product_price, id], (err, results) => { 
+      // "INSERT INTO usagers (u_pseudo, u_email, u_pwd,) VALUES (?,?,?)"
+      "INSERT INTO usagers SET u_pseudo = ?, u_email = ?, u_pwd = ?", [data.u_pseudo, data.u_email, data.u_pwd],(err, results) => {             
         if(err) {
             console.log(err);
             result(err, null);
