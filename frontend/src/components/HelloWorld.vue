@@ -6,7 +6,7 @@
             <div id="formBloc">
                 <form>
                     <input v-model = "pseudo" v-if = "mode == 'create'" placeholder="Pseudo">
-                    <input v-model = "Email" placeholder="Adresse e-mail">
+                    <input v-model = "email" placeholder="Adresse e-mail">
                     <input v-model = "mdp" placeholder="Mot de passe">
                     <button id="btnConect" v-if = "mode == 'login'" @click="connectAccount" >Se connecter</button>
                     <button v-else id="btnSignUp" @click="btnSignUp">Creer un compte</button>
@@ -49,7 +49,7 @@ export default {
     async btnSignUp() {
       try {
 //localhost:3000/api/auth", {
-        await axios.post("http://localhost:3000/api/auth/signup",{ 
+        await axios.post("http://localhost:3000/api/auth",{ 
           u_pseudo : this.pseudo,
           u_email : this.email,
           u_pwd : this.mdp,
@@ -57,6 +57,7 @@ export default {
         this.pseudo = "";
         this.email = "";
         this.mdp = "";
+        this.$router.push("/signup");
       } catch (err) {
         console.log(err);
       }
