@@ -24,8 +24,8 @@ exports.signup = (req, res, next) => {
         u_email: req.body.u_email,
         u_pwd: hash
       }, (err, results) => {
-        if (err) res.status(500).json({err})
-        else res.status(201).json('Utilisateur créé !');
+        if (err)  {res.status(500).json({err})}
+        else {res.status(201).json('Utilisateur créé !')}
       })
         .catch(error => res.status(400).json({ error }));
     })
