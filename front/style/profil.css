@@ -93,6 +93,7 @@ text-decoration: none; }
 #fondProfil{
     margin: 0px auto;
     width: 80%;
+    max-width: 1070px;
     height: 300px;
     background-color: grey;
     display: flex;
@@ -114,7 +115,7 @@ text-decoration: none; }
     height: 180px;
     background-color: black;
     margin-top: 150px;
-    margin-left: 33%;
+    margin-left: 437px;
     border-radius: 50%;
 }
 .fotoProfil img{
@@ -206,9 +207,10 @@ text-decoration: none; }
 }
 #statut{
     max-width: 100%;
+    max-width: 1230px;
     background-color: white;
     height: 130px;
-    margin: 50px 30px;
+    margin: 50px auto;
     border: solid 2px #CACACA;
     border-radius: 20px;
     display: flex;
@@ -267,11 +269,12 @@ form {
 }
 
 #monProfil{
-    max-width: 100%;
-    margin: 0 50px;
+    max-width: 1230px;
+    margin: auto;
     min-height: 400px;
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 #userInformation{
     width: 50%;
@@ -310,6 +313,44 @@ form {
     object-fit: cover;
     border-radius: 10px;   
 
+}
+.myFriend{
+    width: 80%;
+    margin:2% auto;
+    min-height: 180px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0px 0px 8px -2px #B4B4B4;
+}
+.myFriend h1{
+    padding-top: 30px;
+    padding-left: 30px;
+    font-family: 'Arial black';
+}
+.friendList{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.friendShow{
+    width: 20%;
+    height: 90px;
+    margin-left: 10px;
+    margin-bottom: 30px;
+    border-radius: 10px;   
+
+}
+.friendShow img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 0.2px #D3D0D0 solid;
+}
+.friendShow h3{
+    text-align: center;
 }
 #userPublication1{
     width: 50%;
