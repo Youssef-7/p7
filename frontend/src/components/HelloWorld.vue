@@ -61,6 +61,20 @@ export default {
         console.log(err);
       }
     },
+    async btnConect() {
+      try {
+//localhost:3000/api/auth", {
+        await axios.post("http://localhost:3000/api/auth/login",{ 
+          u_email : this.email,
+          u_pwd : this.mdp,
+        });
+        this.email = "";
+        this.mdp = "";
+        console.log(this.email)
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 };
 </script>
