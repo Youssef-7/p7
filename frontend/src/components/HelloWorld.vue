@@ -8,7 +8,7 @@
                     <input v-model = "pseudo" v-if = "mode == 'create'" placeholder="Pseudo">
                     <input v-model = "email" placeholder="Adresse e-mail">
                     <input v-model = "mdp" placeholder="Mot de passe">
-                    <button id="btnConect" v-if = "mode == 'login'" @click="connectAccount" >Se connecter</button>
+                    <button id="btnConect" v-if = "mode == 'login'" @click="btnConect" >Se connecter</button>
                     <button v-else id="btnSignUp" @click="btnSignUp">Creer un compte</button>
                     <a v-if = "mode == 'create'" @click="connectAccount" href="#"><p>Se connecter</p></a>
                     <a href="#"><p>Mot de passe oublié ?</p></a>
