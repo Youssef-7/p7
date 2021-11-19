@@ -17,8 +17,8 @@ exports.insertUser = (data, result) => {
 }
 
 // Get Single post
-exports.getUsers = (u_email, result) => {
-      db.query( "SELECT * FROM usagers WHERE u_email = ?;", [u_email], (err, results) => {             
+exports.getUsers = (data, result) => {
+      db.query( "SELECT * FROM usagers WHERE u_email = ?;", [data.u_email], (err, results) => {             
         if(err) {
             console.log(err);
             result(err, null);
