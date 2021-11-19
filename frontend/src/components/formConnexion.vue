@@ -12,7 +12,7 @@
                     <button v-else id="btnSignUp" @click="btnSignUp">Creer un compte</button>
                     <a v-if = "mode == 'create'" @click="connectAccount" href="#"><p>Se connecter</p></a>
                     <a href="#"><p>Mot de passe oublié ?</p></a>
-                    <a v-if = "mode == 'login'" @click="createAccount" href="#"><p>Creer un compte</p></a>
+                    <a v-if = "mode == 'login'" @click="createAccount" href="#"><p >Creer un compte</p></a>
                     <div id="trait"></div>
                     
                 </form>  
@@ -65,12 +65,12 @@ export default {
       try {
 //localhost:3000/api/auth", {
         await axios.post("http://localhost:3000/api/auth/login",{ 
-          u_email : this.email,
-          u_pwd : this.mdp,
+          u_email : this.form_email,
+          u_pwd : this.form_mdp,
         });
-        this.email = "";
-        this.mdp = "";
-        console.log(this.email)
+        this.form_email = "";
+        this.form_mdp = "";
+        console.log(this.form_email)
       } catch (err) {
         console.log(err);
       }
