@@ -4,7 +4,7 @@
 
 <script>
 // @ is an alias to /src
-import formConnexion from '@/components/formConnexion.vue'
+import formConnexion from '@/components/pageAccueil.vue'
 
 export default {
   name: 'Home',

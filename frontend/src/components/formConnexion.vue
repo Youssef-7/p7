@@ -7,7 +7,7 @@
                 <form>
                     <input v-model = "form_pseudo" v-if = "mode == 'create'" placeholder="Pseudo">
                     <input v-model = "form_email" placeholder="Adresse e-mail">
-                    <input v-model = "form_mdp" placeholder="Mot de passe">
+                    <input v-model = "form_pwd" placeholder="Mot de passe">
                     <button id="btnConect" v-if = "mode == 'login'" @click="btnConect" >Se connecter</button>
                     <button v-else id="btnSignUp" @click="btnSignUp">Creer un compte</button>
                     <a v-if = "mode == 'create'" @click="connectAccount" href="#"><p>Se connecter</p></a>
@@ -52,25 +52,24 @@ export default {
         await axios.post("http://localhost:3000/api/auth/signup",{ 
           u_pseudo : this.form_pseudo,
           u_email : this.form_email,
-          u_pwd : this.form_mdp,
+          u_pwd : this.form_pwd ,
         });
-        this.pseudo = "";
-        this.email = "";
-        this.mdp = "";
+        this.form_pseudo = "";
+        this.form_email = "";
+        this.form_pwd = "";
       } catch (err) {
         console.log(err);
       }
     },
     async btnConect() {
       try {
-//localhost:3000/api/auth", {
-        await axios.post("http://localhost:3000/api/auth/login",{ 
+            console.log("this.form_email =" + this.form_email);
+        await axios.post("http://localhost:3000/api/login",{ 
           u_email : this.form_email,
-          u_pwd : this.form_mdp,
+          u_pwd : this.form_pwd,
         });
         this.form_email = "";
-        this.form_mdp = "";
-        console.log(this.form_email)
+        this.form_pwd  = "";
       } catch (err) {
         console.log(err);
       }

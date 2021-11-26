@@ -1,27 +1,4 @@
 <template>
-    <header>
-      <nav>
-        <div class="navBar">
-            <div class="socialTitle">
-              <h1>Groupomania</h1>
-            </div>
-            <div class="searchBar">
-              <div class="search">
-                <button type="submit" class="searchButton">
-                 <i class="fa fa-search"></i>
-                </button>
-                <input type="text" class="searchTerm" placeholder="Rechercher">
-            </div>
-            </div>
-            <div class="userButton">
-                <button type="submit" class="profilButton">
-                <i class="fas fa-user"></i>
-                <i class="fas fa-chevron-down"></i>
-                </button>
-            </div>   
-        </div>
-      </nav>
-    </header>
    <header>
       <nav>
         <div class="navBar">
@@ -48,14 +25,18 @@
     <section id="sectionPublication">
       <div class="publication">
         <form>
+           <input v-model="createPostTitre" name="createPost" class="createPost" placeholder="Titre de la publication" type="text">
           <input v-model="createPost" name="createPost" class="createPost" placeholder="Quoi de neuf ?" type="text">
-        </form>
+          <input type="hidden" id="p_title" name="p_title" value="{{p_title}}">
+          <input type="hidden" id="p_parent" name="p_parent" value="{{p_id}}">
+          <input type="hidden" id="p_user_id" name="p_user_id" value="{{p_user_id}}">
         <div class="sendPics">
           <i class="far fa-images"></i>
         </div>
         <div class="send">
           <button @click="sendPublication" class="sendPublication">Envoyer</button>
         </div>
+        </form>
       </div>
     </section>
     <section id= "allPost">
@@ -140,6 +121,7 @@ export default {
     return {
       posts: [],
       createPost: "",
+      createPostTitre:"",
     };
   },
     created() {
@@ -159,8 +141,10 @@ export default {
       try {
         await axios.post("http://localhost:3000/post", {
           p_text: this.createPost,
+          p_titre: this.createPostTitre,
         });
         this.createPost = "";
+        this.createPostTitre = "";
       } catch (err) {
         console.log(err);
       }
