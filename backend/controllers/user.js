@@ -33,27 +33,44 @@ exports.signup = (req, res, next) => {
     .catch(error => res.status(500).json({ error }));
 };
 } // End exports.signup
-exports.login = (req, res, next) => {
-  user_model.getUsers({ u_email: req.body.u_email })
-    .then(user_bdd => {
-      if (!user_bdd) {
-        return res.status(401).json({ error: 'Utilisateur non trouvé !' });
-      }
-      bcrypt.compare(req.body.u_pwd, user.u_pwd)
-        .then(valid => {
-          if (!valid) {
-            return res.status(401).json({ error: 'Mot de passe incorrect !' });
-          }
-          res.status(200).json({
-            userId: user.u_id,
-            token: jwt.sign(
-              // { userId: user._id, + pseudo},
-              'RANDOM_TOKEN_SECRET',
-              { expiresIn: '24h' }
-            )
-          });
-        })
-        .catch(error => res.status(500).json({ error:"2"}));
-    })
-    .catch(error => res.status(500).json({ error:"3" }));
+
+
+// exports.login = (req, res, next) => {
+//   user_model.getUsers( req.body.u_email, (err, results) => {
+//           if (err){
+//             res.send(err);
+//         }else{
+//             res.json(results);
+//         }
+//     });
+// }
+ exports.login = async (req, res, next) => {
+    try {
+        let email = req.body.u_email;
+        const pwd = req.body.u_pwd;
+        if (!email || !pwd) {  res.status(400).json(`${!email ? "email" : "pwd"} manquant`); return; }
+        user_model.getUserByEmail(email, (err, results) => {
+            try {
+                bcrypt.compare(req.body.password, user.password)
+                .then(valid => {
+                if (!valid) {
+                    return res.status(401).json({error: "Mot de passe incorrect"});
+                }
+                res.status(200).json({
+                    userId: results[0].u_id,
+                    token: jwt.sign (
+                        { userId: results[0].u_id },
+                        'RANDOM_TOKEN_SECRET', // clé secrète de l'encodage - en production : 'string' longue et aléatoire
+                        { expiresIn: '24h' }
+                        )
+                    });
+                })
+                .catch(err => res.status(500).json({ err }));
+            } catch (error) {
+                return res.status(404).json({error: "Utilisateur non trouvé"});
+            }
+        });
+    } catch (error) {
+        res.status(403).json({ error: 'requête non autorisée'});
+    }
 };

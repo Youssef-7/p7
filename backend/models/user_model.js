@@ -18,16 +18,29 @@ exports.insertUser = (data, result) => {
 }
 
 // Get Single post
-exports.getUsers = (data, result) => {
-                console.log("models/user_model: data " + data.u_email);
-            console.log("SELECT * FROM usagers WHERE u_email = " + data.u_email);
-      db.query( "SELECT * FROM usagers WHERE u_email = ?;", [u_email], (err, results) => {             
-        if(err) {
-            console.log(err);
+// exports.getUsers = (u_email, result) => {
+//                 console.log("models/user_model: data " + u_email);
+//             console.log("SELECT * FROM usagers WHERE u_email = " + u_email);
+//       db.query( "SELECT * FROM usagers WHERE u_email = ?;", [u_email], (err, results) => {             
+//         if(err) {
+//             console.log(err);
+//             result(err, null);
+//         } else {
+//             result(null, results[0]);
+//         }
+//     });   
+// }
+ // fonction find user by email
+exports.getUserByEmail = async (u_email, result) => {
+    db.query("SELECT * FROM usagers WHERE u_email = ?", [u_email], (err, results) => {
+        if (err) {
+            // console.log(err);
             result(err, null);
-        } else {
-            result(null, results[0]);
+            return err;
         }
-    });   
+        else {
+            result(null, results);
+            return results;
+        }
+    });
 }
- 
